@@ -83,13 +83,19 @@ export default function CurrencyItem (props: CurrencyProps){
                                         <ul>
                                             { meta.contract_address.map((address) => (
                                                 <li key={address.contract_address}>
+                                                    <Button
+                                                        style={{ marginTop: '1rem', marginRight: '1rem' }}
+                                                        onClick={() => fetchContractToken(address.contract_address)}
+                                                        // disabled={!(address.platform.coin.symbol === 'ETH')}
+                                                    >
+                                                        View
+                                                    </Button>
                                                     {address.platform.coin.name}: <strong>{address.contract_address}</strong>
                                                 </li>
                                             )) }
                                         </ul>
                                     </Accordion>
                                     <Detail>Total Supply: <strong>{total_supply}</strong></Detail>
-                                    <Button style={{ marginTop: '1rem' }} onClick={() => fetchContractToken()}>View Sample Smart Contract address</Button>
                                     <Detail>{JSON.stringify(contractToken)}</Detail>
                                     </>
                                     : null

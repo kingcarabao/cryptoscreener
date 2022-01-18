@@ -3,25 +3,38 @@ import styled from 'styled-components';
 
 const Button = styled.button`
     padding: .5rem;
-    border: none;
-    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    border: 1px solid #ccc;
     border-radius: .5rem;
-    background-color: #28a745;
-    color: #fff;
+    background-color: transparent;
     cursor: pointer;
-    font-weight: bolder;
+    displat: inline-block;
+    // font-weight: bolder;
+    -webkit-transition: all .5s ease;
+    -moz-transition: all .5s ease;
+        -ms-transition: all .5s ease;
+        -o-transition: all .5s ease;
+            transition: all .5s ease;
+    &:hover {
+        border-color: rgba(0, 0, 0, .35);
+	    box-shadow: 0 0 5px rgba(0, 0, 0, .2);
+    }
+    $:focus {
+        border-color: rgba(0, 0, 0, .35);
+	    box-shadow: 0 0 5px rgba(0, 0, 0, .2);
+    }
 `;
 
 interface Props {
     style?: React.CSSProperties;
     children: React.ReactNode;
     onClick: Function;
+    disabled?: boolean;
 }
 
 export default function ButtonComponent(props: Props) {
-    const {style, children, onClick} = props
+    const {style, children, onClick, disabled} = props
     return (
-        <Button onClick={onClick} style={style ? style : null}>
+        <Button onClick={onClick} style={style ? style : null} disabled={disabled}>
             {children}
         </Button>
     )

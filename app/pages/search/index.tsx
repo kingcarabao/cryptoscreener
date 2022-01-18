@@ -41,10 +41,10 @@ export default function Dashboard() {
         return loading ? "Loading..." : renderData()
     }
 
-    async function fetchContractToken () {
+    async function fetchContractToken (address: string) {
         setLoadingContract(true)
         try {
-            const response = await localHttp.get(`myapi/contract-token`, { params: { address: '0xdac17f958d2ee523a2206206994597c13d831ec7' } });
+            const response = await localHttp.get(`myapi/contract-token`, { params: { address } });
             setContractToken(response.data);
         } catch (error) {
             alert(error)
