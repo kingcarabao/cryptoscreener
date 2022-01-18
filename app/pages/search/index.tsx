@@ -7,9 +7,11 @@ import CurrencyItem from '../../components/Currency/CurrencyItem';
 import { Container, Input } from '../../components/UI';
 
 export default function Dashboard() {
-    const [currencies, setCurrencies] = useState<any>(null);
+    const [currency, setCurrency] = useState<any>(null);
     const [loading, setLoading] = useState(false);
-    const [searchByTicker, setSearchByTicker] = useState('');
+    const [loadingContract, setLoadingContract] = useState(false);
+    const [searchByTicker, setSearchByTicker] = useState('usdt');
+    const [contractToken, setContractToken] = useState<any>(null);
     const debounce = useDebounce(fetchCurrencies);
 
     /**
@@ -20,7 +22,7 @@ export default function Dashboard() {
         setLoading(true)
         try {
             const response = await localHttp.get(`myapi/cryptocurrency`, { params: { ticker: searchByTicker } });
-            setCurrencies(response.data);
+            setCurrency(response.data);
         } catch (error) {
             alert(error)
         }
@@ -31,21 +33,30 @@ export default function Dashboard() {
      * This renders the list of currencies from api.
      * Has loading
      */
-    function RenderCoinList() {
+    function RenderCoin() {
         function renderData () {
-            return currencies && Array.isArray(currencies)
-            ? currencies.map((currency) => CurrencyItem(currency))
-            : null
+            return currency ? CurrencyItem({...currency, fetchContractToken, contractToken}) : null
         }
 
         return loading ? "Loading..." : renderData()
+    }
+
+    async function fetchContractToken () {
+        setLoadingContract(true)
+        try {
+            const response = await localHttp.get(`myapi/contract-token`, { params: { address: '0xdac17f958d2ee523a2206206994597c13d831ec7' } });
+            setContractToken(response.data);
+        } catch (error) {
+            alert(error)
+        }
+        setLoadingContract(false)
     }
 
     return (
         <Container>
             <h1>Pluto Digital Technical Screener</h1>
             <Input
-                label="Search Currency"
+                label="Search Currency via Ticker"
                 type="text"
                 placeholder="eg. BTC"
                 value={searchByTicker}
@@ -55,7 +66,7 @@ export default function Dashboard() {
                     debounce(e.target.value);
                 }}
             />
-            {RenderCoinList()}
+            {RenderCoin()}
         </Container>
     )
 }

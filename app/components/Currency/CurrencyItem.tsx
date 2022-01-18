@@ -1,31 +1,106 @@
-import React from 'react'
-import { Card } from '../UI';
+import React, { useState } from 'react';
+import { localHttp } from '../../utils/axios';
+import { Info, Rank, Name, Price, Detail, CurrencyLogo, Divider, Accordion } from './CurrencyStyled';
+import { Card, Button } from '../UI';
+
+interface Price {
+    quote: { USD: { price: number } };
+}
+
+interface Platform {
+    name: string;
+    symbol: string;
+}
+
+interface Meta {
+    logo: string;
+    category: string;
+    contract_address: { contract_address: string, platform: {coin: any, name: string} }[];
+}
 
 interface CurrencyProps {
     id: string;
     name: string;
     symbol: string;
-    rank: number;
-    platform: { name: string, symbol: string } | null
-    quote: { USD: { price: number } };
+    map: { rank: string | number };
+    is_active: boolean | number;
+    platform: Platform | null
+    price: Price;
+    meta: Meta;
+    total_supply: number | string;
+    fetchContractToken: Function;
     children?: React.ReactNode;
 }
 
 export default function CurrencyItem (props: CurrencyProps){
-    const { id, name, symbol, rank, platform, quote } = props;
+    const { id, name, symbol, map, platform, price, meta, is_active, total_supply, fetchContractToken, contractToken } = props;
+
+    /**
+     * checks if token is running in etherum blockchain
+     */
+    function isEthereumToken() {
+        if (!platform)
+            return false;
+        else
+            return platform.symbol === 'ETH'
+    }
+
+    /**
+     * Messy. must break components
+     */
     return (
         <Card key={id} style={{ marginTop: '1rem' }}>
-            <ul>
-                <h6>Rank: #{rank}</h6>
-                <h3>{name}</h3>
-                <h3>{quote.USD.price}</h3>
-                <h4>Blockchain: {platform ? platform.name : null}</h4>
-                {/* {
-                    Object.entries(props).map((item) => {
-                        return <li key={item[0]}>{item[0]} <strong>{JSON.stringify(item[1])}</strong></li>
-                    })
-                } */}
-            </ul>
+            {
+                id
+                ?
+                <Info>
+                    <Rank>Rank: #{map ? map.rank : 'n/a'}</Rank>
+                    <Name>
+                        {
+                            meta && meta.logo
+                            ? <CurrencyLogo src={meta ? meta.logo : null} alt={`${name}-logo`}/>
+                            : null
+                        }
+                        {name} ({symbol})
+                    </Name>
+                    <Price>${price ? price.quote.USD.price : 'Price Unavailable'}</Price>
+                    <Divider />
+                    <Detail>Platform: <strong>{platform ? platform.name : 'n/a'}</strong></Detail>
+                    <Detail>Category: <strong>{meta ? meta.category : 'n/a'}</strong></Detail>
+                    <Detail>Active: <strong>{is_active ? 'True' : 'False'}</strong></Detail>
+                    {
+                        isEthereumToken()
+                        ?
+                            <>
+                                <Divider />
+                                <h3 style={{ marginBottom: '1rem' }}>Ethereum details:</h3>
+                                {
+                                    meta
+                                    ?
+                                    <>
+                                    <Accordion>
+                                        <summary>Contract Address:</summary>
+                                        <ul>
+                                            { meta.contract_address.map((address) => (
+                                                <li key={address.contract_address}>
+                                                    {address.platform.coin.name}: <strong>{address.contract_address}</strong>
+                                                </li>
+                                            )) }
+                                        </ul>
+                                    </Accordion>
+                                    <Detail>Total Supply: <strong>{total_supply}</strong></Detail>
+                                    <Button style={{ marginTop: '1rem' }} onClick={() => fetchContractToken()}>View Sample Smart Contract address</Button>
+                                    <Detail>{JSON.stringify(contractToken)}</Detail>
+                                    </>
+                                    : null
+                                }
+                            </>
+                        : null
+                    }
+                </Info>
+                : 'No results found'
+            }
+            
         </Card>
     )
 }
