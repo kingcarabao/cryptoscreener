@@ -3,7 +3,7 @@ const nextConfig = {
   reactStrictMode: true,
   env: {
     customKey: 'my-value',
-    API_URL: 'http://localhost:4321/'
+    API_URL: 'https://cryptoscreenerapi-4acs9t87l-kingcarabao.vercel.app/'
   },
 }
 
