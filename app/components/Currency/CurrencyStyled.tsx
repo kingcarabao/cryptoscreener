@@ -23,7 +23,7 @@ export const Name = styled.h3`
     gap: 12px;
 `;
 
-export const Price = styled.h2`
+export const PriceQuote = styled.h2`
     margin-bottom: .5rem;
 `;
 

@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
  * I made a debounce custom hook
  */
 export default function useDebounce (func: Function) {
-    const [debounce, setDebounce] = useState(null);
+    const [debounce, setDebounce] = useState('');
     const [timer, setTimer] = useState<ReturnType <typeof setTimeout> | null>(null);
     
     /**
@@ -28,7 +28,7 @@ export default function useDebounce (func: Function) {
          return () => clearLocalTimeout();
     }, []);
 
-    return (keyword: any) => {
+    return (keyword: string) => {
         setDebounce(keyword)
     }
 }

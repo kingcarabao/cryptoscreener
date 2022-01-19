@@ -5,9 +5,11 @@ import useDebounce from '../../hooks/useDebounce'
 // Components
 import CurrencyItem from '../../components/Currency/CurrencyItem';
 import { Container, Input } from '../../components/UI';
+// Types
+import { Currency } from '../../@types/currencyTypes';
 
 export default function Dashboard() {
-    const [currency, setCurrency] = useState<any>(null);
+    const [currency, setCurrency] = useState<Currency | null>(null);
     const [loading, setLoading] = useState(false);
     const [loadingContract, setLoadingContract] = useState(false);
     const [searchByTicker, setSearchByTicker] = useState('usdt');
@@ -60,7 +62,7 @@ export default function Dashboard() {
                 type="text"
                 placeholder="eg. BTC"
                 value={searchByTicker}
-                onChange={(e: any ) => {
+                onChange={(e) => {
                     e.preventDefault();
                     setSearchByTicker(e.target.value);
                     debounce(e.target.value);

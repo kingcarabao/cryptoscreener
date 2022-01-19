@@ -1,36 +1,11 @@
 import React, { useState } from 'react';
 import { localHttp } from '../../utils/axios';
-import { Info, Rank, Name, Price, Detail, CurrencyLogo, Divider, Accordion, AccordionBody, ContractList, ContractListItem } from './CurrencyStyled';
+import { Info, Rank, Name, PriceQuote, Detail, CurrencyLogo, Divider, Accordion, AccordionBody, ContractList, ContractListItem } from './CurrencyStyled';
 import { Card, Button } from '../UI';
+import { Currency } from '../../@types/currencyTypes';
 
-interface Price {
-    quote: { USD: { price: number } };
-}
-
-interface Platform {
-    name: string;
-    symbol: string;
-}
-
-interface Meta {
-    logo: string;
-    category: string;
-    contract_address: { contract_address: string, platform: {coin: any, name: string} }[];
-}
-
-interface CurrencyProps {
-    id: string;
-    name: string;
-    symbol: string;
-    map: { rank: string | number };
-    is_active: boolean | number;
-    platform: Platform | null
-    price: Price;
-    meta: Meta;
-    total_supply: number | string;
-    fetchContractToken: Function;
+interface CurrencyProps extends Currency {
     children?: React.ReactNode;
-    contractToken: any;
 }
 
 export default function CurrencyItem (props: CurrencyProps){
@@ -64,7 +39,7 @@ export default function CurrencyItem (props: CurrencyProps){
                         }
                         {name} ({symbol})
                     </Name>
-                    <Price>${price ? price.quote.USD.price : 'Price Unavailable'}</Price>
+                    <PriceQuote>${price ? price.quote.USD.price : 'Price Unavailable'}</PriceQuote>
                     <Divider />
                     <Detail>Platform: <strong>{platform ? platform.name : 'n/a'}</strong></Detail>
                     <Detail>Category: <strong>{meta ? meta.category : 'n/a'}</strong></Detail>

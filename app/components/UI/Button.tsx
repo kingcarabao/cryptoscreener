@@ -28,7 +28,7 @@ const Button = styled.button`
 interface Props {
     style?: React.CSSProperties;
     children: React.ReactNode;
-    onClick: any;
+    onClick: React.MouseEventHandler<HTMLButtonElement>;
     disabled?: boolean;
 }
 
