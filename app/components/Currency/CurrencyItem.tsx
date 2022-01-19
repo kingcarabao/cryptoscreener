@@ -30,6 +30,7 @@ interface CurrencyProps {
     total_supply: number | string;
     fetchContractToken: Function;
     children?: React.ReactNode;
+    contractToken: any;
 }
 
 export default function CurrencyItem (props: CurrencyProps){
