@@ -87,7 +87,7 @@ export default function CurrencyItem (props: CurrencyProps){
                                                     { meta.contract_address.map((address) => (
                                                         <ContractListItem key={address.contract_address}>
                                                             <Button
-                                                                style={{ marginTop: '1rem', marginRight: '1rem' }}
+                                                                style={{ marginRight: '1rem' }}
                                                                 onClick={() => fetchContractToken(address.contract_address)}
                                                                 // disabled={!(address.platform.coin.symbol === 'ETH')}
                                                             >

@@ -87,7 +87,7 @@ export const ContractList = styled.ul`
 `;
 
 export const ContractListItem = styled.li`
-    padding: 0;
+    padding: .5rem 0;
     margin: 0;
 
     &::marker {

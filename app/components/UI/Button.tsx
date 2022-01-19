@@ -2,12 +2,13 @@ import React from 'react';
 import styled from 'styled-components';
 
 const Button = styled.button`
+    margin: 0;
     padding: .5rem;
     border: 1px solid #ccc;
     border-radius: .5rem;
     background-color: transparent;
     cursor: pointer;
-    displat: inline-block;
+    display: inline-block;
     // font-weight: bolder;
     -webkit-transition: all .5s ease;
     -moz-transition: all .5s ease;
