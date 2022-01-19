@@ -1,7 +1,7 @@
 import axios from 'axios';
-
+console.log(process.env.API_URL);
 const localHttp = axios.create({
-    baseURL: 'http://localhost:4321'
+    baseURL: process.env.API_URL
 })
 
 localHttp.interceptors.response.use(
