@@ -29,6 +29,7 @@ export const Price = styled.h2`
 
 export const Detail = styled.p`
     margin-bottom: .5rem;
+    overflow-wrap: break-word;
 `;
 
 export const CurrencyLogo = styled.img`
@@ -45,7 +46,9 @@ export const Divider = styled.hr`
 
 export const Accordion = styled.details`
     margin-bottom: .5rem;
-    &>summary{
+    border: 1px solid #ccc;
+    border-radius: .5rem;
+    & > summary{
         border: none;
         border-radius: .5rem;
         padding: .5rem;
@@ -55,14 +58,7 @@ export const Accordion = styled.details`
         position: relative;
         cursor: pointer;
     }
-    &>details {
-        margin-top: 5px;
-        background: white;
-    }
-    &>details summary::-webkit-details-marker {
-        display:none;
-    }
-    &>summary:before {
+    & > summary:before {
         content: '';
         border-width: .4rem;
         border-style: solid;
@@ -74,4 +70,31 @@ export const Accordion = styled.details`
         transform-origin: .2rem 50%;
         transition: .25s transform ease;
     }
+    & > * {
+        overflow-wrap: break-word;
+    }
+    &[open] > summary {
+        border-radius: .5rem .5rem 0 0;
+    }
+    &[open] > summary:before {
+        transform: rotate(90deg);
+    }
+`;
+
+export const ContractList = styled.ul`
+    padding: 0;
+    margin: 0;
+`;
+
+export const ContractListItem = styled.li`
+    padding: 0;
+    margin: 0;
+
+    &::marker {
+        content: none;
+    }
+`;
+
+export const AccordionBody = styled.div`
+    padding: 1rem;
 `;

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { localHttp } from '../../utils/axios';
-import { Info, Rank, Name, Price, Detail, CurrencyLogo, Divider, Accordion } from './CurrencyStyled';
+import { Info, Rank, Name, Price, Detail, CurrencyLogo, Divider, Accordion, AccordionBody, ContractList, ContractListItem } from './CurrencyStyled';
 import { Card, Button } from '../UI';
 
 interface Price {
@@ -74,30 +74,32 @@ export default function CurrencyItem (props: CurrencyProps){
                         ?
                             <>
                                 <Divider />
-                                <h3 style={{ marginBottom: '1rem' }}>Ethereum details:</h3>
+                                <h3 style={{ marginBottom: '1rem' }}>Ethereum token details:</h3>
                                 {
                                     meta
                                     ?
                                     <>
-                                    <Accordion>
-                                        <summary>Contract Address:</summary>
-                                        <ul>
-                                            { meta.contract_address.map((address) => (
-                                                <li key={address.contract_address}>
-                                                    <Button
-                                                        style={{ marginTop: '1rem', marginRight: '1rem' }}
-                                                        onClick={() => fetchContractToken(address.contract_address)}
-                                                        // disabled={!(address.platform.coin.symbol === 'ETH')}
-                                                    >
-                                                        View
-                                                    </Button>
-                                                    {address.platform.coin.name}: <strong>{address.contract_address}</strong>
-                                                </li>
-                                            )) }
-                                        </ul>
-                                    </Accordion>
-                                    <Detail>Total Supply: <strong>{total_supply}</strong></Detail>
-                                    <Detail>{JSON.stringify(contractToken)}</Detail>
+                                        <Detail>Total Supply: <strong>{total_supply}</strong></Detail>
+                                        <Accordion>
+                                            <summary>Contract Address:</summary>
+                                            <AccordionBody>
+                                                <ContractList>
+                                                    { meta.contract_address.map((address) => (
+                                                        <ContractListItem key={address.contract_address}>
+                                                            <Button
+                                                                style={{ marginTop: '1rem', marginRight: '1rem' }}
+                                                                onClick={() => fetchContractToken(address.contract_address)}
+                                                                // disabled={!(address.platform.coin.symbol === 'ETH')}
+                                                            >
+                                                                View
+                                                            </Button>
+                                                            {address.platform.coin.name}: <strong>{address.contract_address}</strong>
+                                                        </ContractListItem>
+                                                    )) }
+                                                </ContractList>
+                                            </AccordionBody>
+                                        </Accordion>
+                                        <Detail>{JSON.stringify(contractToken)}</Detail>
                                     </>
                                     : null
                                 }

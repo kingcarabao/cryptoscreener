@@ -5,6 +5,12 @@ const Card = styled.div`
     padding: 1rem;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     border-radius: .5rem;
+    display: flex;
+    flex-wrap: wrap;
+
+    & > * {
+        width: 100%;
+    }
 `;
 
 interface Props {
