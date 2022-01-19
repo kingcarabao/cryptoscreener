@@ -59,7 +59,7 @@ export default function CurrencyItem (props: CurrencyProps){
                     <Name>
                         {
                             meta && meta.logo
-                            ? <CurrencyLogo src={meta ? meta.logo : null} alt={`${name}-logo`}/>
+                            ? <CurrencyLogo src={meta.logo} alt={`${name}-logo`}/>
                             : null
                         }
                         {name} ({symbol})

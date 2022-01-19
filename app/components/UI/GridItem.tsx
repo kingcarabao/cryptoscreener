@@ -14,7 +14,7 @@ interface Props {
 export default function GridItemComponent(props: Props) {
     const {style, children} = props
     return (
-        <GridItem style={style ? style : null}>
+        <GridItem style={style ? style : {}}>
             {children}
         </GridItem>
     )

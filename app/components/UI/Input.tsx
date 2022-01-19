@@ -37,19 +37,22 @@ interface Props {
     label: string;
     style?: React.CSSProperties;
     className?: string;
-    children?: React.ReactNode;
     type?: string;
     placeholder?: string;
     value?: any;
-    onChange?: Function;
+    onChange: any;
 }
 
 export default function InputComponent(props: Props) {
+    const inputProps = {
+        type: props.type ? props.type : '',
+        placeholder: props.placeholder ? props.placeholder : '',
+        value: props.value,
+        onChange: props.onChange
+    }
     return (
         <Label> {props.label}
-            <Input {...props}>
-                {props.children}
-            </Input>
+            <Input {...inputProps} />
         </Label>
     )
 }

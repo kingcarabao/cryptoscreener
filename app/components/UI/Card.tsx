@@ -15,7 +15,7 @@ interface Props {
 export default function CardComponent(props: Props) {
     const {style, children} = props
     return (
-        <Card style={style ? style : null}>
+        <Card style={style ? style : {}}>
             {children}
         </Card>
     )

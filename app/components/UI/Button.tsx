@@ -27,14 +27,14 @@ const Button = styled.button`
 interface Props {
     style?: React.CSSProperties;
     children: React.ReactNode;
-    onClick: Function;
+    onClick: any;
     disabled?: boolean;
 }
 
 export default function ButtonComponent(props: Props) {
     const {style, children, onClick, disabled} = props
     return (
-        <Button onClick={onClick} style={style ? style : null} disabled={disabled}>
+        <Button onClick={onClick} style={style ? style : {}} disabled={disabled}>
             {children}
         </Button>
     )
