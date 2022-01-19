@@ -54,7 +54,7 @@ export default function Dashboard() {
 
     return (
         <Container>
-            <h1>Pluto Digital Technical Screener</h1>
+            <h1>Crypto Currency Simple Search App</h1>
             <Input
                 label="Search Currency via Ticker"
                 type="text"
