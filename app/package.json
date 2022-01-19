@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@types/styled-components": "^5.1.20",
     "axios": "^0.24.0",
     "babel-plugin-styled-components": "^2.0.2",
     "dotenv": "^14.1.0",
